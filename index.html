@@ -1,0 +1,131 @@
+ 
+<html>
+	<head>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+
+		<script src="js/jquery-3.3.1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+
+		<script type="text/javascript">
+
+			$(function(){
+				var fetched_data=0;
+				var chunks=[];
+				$("#ask-now").click(function(){
+					chunks=[];
+					var results=[];
+        			var proxy = "https://cors-anywhere.herokuapp.com/";
+					var main_url = "http://sda.tech/earl/api/processQuery";
+					var url = proxy+main_url;
+					var question = $("#user_question").val();
+					
+
+					$.ajax( url, {
+							type: "POST",
+						    data:"{\"nlquery\":\""+question+"\"}",
+						    contentType: "application/json",
+
+						}).done(function (data) {
+						    var obj = JSON.parse(data);
+						    fetched_data=data;
+						    //$(".info").text(data);
+
+						    var qstring="";
+
+						    for (var key in obj) {
+							  if (obj.hasOwnProperty(key)) {
+							  	if(key=="rerankedlists"){
+							  		for(x in obj[key]){
+							  			var temp=[];
+							  			for(y in obj[key][x]){
+							  				temp.push(obj[key][x][y][1]);
+							  			}
+							  			results.push(temp);
+							  		}
+							  	}else if(key=="chunktext"){
+							    	for(var k in obj[key]){
+							    		chunks.push(obj[key][k]["chunk"]);
+							    	}
+							    }
+							  }
+							}
+
+							var final_output="";
+
+							for(var m in results){
+								
+								
+								final_output += '<div class="col-md-6 order-md-6 mb-4">';
+							    final_output += '<h4 class="d-flex  align-items-center mb-6">';
+							    final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 30px;">'+(results[m].length)+'</span>';
+							    final_output += '<span class="text-test">Results found for <strong>'+chunks[m]+'</strong></span>';
+							            
+							    final_output+= '</h4></div>';
+								if(results[m].length>=5){
+									final_output+= '<div>*Showing the top 5 results</div>';
+								}
+
+							   	final_output+= '<ul class="list-group" style="auto;">';
+
+							   	if(results[m]<5){
+									for(var x in results[m]){
+										final_output+= '<li class="list-group-item">'+(results[m][x])+'</li>';		
+							   		}
+							   	}else{
+
+									for(var x in results[m]){
+										if(x>4){
+											break;
+										}
+										final_output+= '<li class="list-group-item">'+(results[m][x])+'</li>';		
+							   		}
+							   		
+							   	}
+
+							   	
+		        				
+
+		        				final_output+= '</ul></br></br>';
+
+
+
+							}
+
+							$(".results").html(final_output);
+
+
+
+						}).fail(function (error) {
+						    console.log("Error occured: error type: "+error);
+						});
+    				});
+
+				});
+
+			
+
+		</script>
+
+		<title>Ask Now</title>
+	</head>
+
+
+	<body>
+		<div class="container">
+		</br></br>
+			<h1>DBpedia Database</h1>
+			<div class="input-group mb-3">
+			  <input type="text" class="form-control" placeholder="Ask your question" aria-label="ask-q" aria-describedby="basic-addon2" id="user_question">
+			  <div class="input-group-append">
+			    <button type="button" class="btn btn-success" id="ask-now">AskNow</button>
+			  </div>
+			</div>
+		</br>
+
+			<div class="results">
+
+			</div>
+	
+	</body>
+</html>
