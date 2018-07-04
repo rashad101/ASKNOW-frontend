@@ -15,14 +15,14 @@
 				$("#ask-now").click(function(){
 					chunks=[];
 					var results=[];
-        			var proxy = "https://cors-anywhere.herokuapp.com/";
+        				var proxy = "https://cors-anywhere.herokuapp.com/";
 					var main_url = "http://sda.tech/earl/api/processQuery";
 					var url = proxy+main_url;
 					var question = $("#user_question").val();
 					
 
 					$.ajax( url, {
-							type: "POST",
+						    type: "POST",
 						    data:"{\"nlquery\":\""+question+"\"}",
 						    contentType: "application/json",
 
@@ -44,9 +44,9 @@
 							  			results.push(temp);
 							  		}
 							  	}else if(key=="chunktext"){
-							    	for(var k in obj[key]){
-							    		chunks.push(obj[key][k]["chunk"]);
-							    	}
+									for(var k in obj[key]){
+										chunks.push(obj[key][k]["chunk"]);
+									}
 							    }
 							  }
 							}
@@ -56,7 +56,7 @@
 							for(var m in results){
 								
 								
-								final_output += '<div class="col-md-6 order-md-6 mb-4">';
+							    final_output += '<div class="col-md-6 order-md-6 mb-4">';
 							    final_output += '<h4 class="d-flex  align-items-center mb-6">';
 							    final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 30px;">'+(results[m].length)+'</span>';
 							    final_output += '<span class="text-test">Results found for <strong>'+chunks[m]+'</strong></span>';
@@ -83,23 +83,16 @@
 							   		
 							   	}
 
-							   	
-		        				
-
 		        				final_output+= '</ul></br></br>';
-
-
 
 							}
 
 							$(".results").html(final_output);
 
-
-
 						}).fail(function (error) {
 						    console.log("Error occured: error type: "+error);
 						});
-    				});
+    					});
 
 				});
 
@@ -123,9 +116,9 @@
 			</div>
 		</br>
 
-			<div class="results">
+		<div class="results">
 
-			</div>
+		</div>
 	
 	</body>
 </html>
