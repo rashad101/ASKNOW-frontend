@@ -70,7 +70,7 @@
 
 							   	if(results[m]<5){
 									for(var x in results[m]){
-										final_output+= '<li class="list-group-item">'+(results[m][x])+'</li>';		
+										final_output+= '<li class="list-group-item"><a href="'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
 							   		}
 							   	}else{
 
@@ -78,7 +78,7 @@
 										if(x>4){
 											break;
 										}
-										final_output+= '<li class="list-group-item">'+(results[m][x])+'</li>';		
+										final_output+= '<li class="list-group-item"><a href="'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
 							   		}
 							   		
 							   	}
