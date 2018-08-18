@@ -20,14 +20,19 @@
 					var main_url = "http://sda.tech/earl/api/processQuery";
 					var url = proxy+main_url;
 					var question = $("#user_question").val();
-					
+					$("#loader").css("display","block");
 
-					$.ajax( url, {
+					if(document.getElementById("customControlInline").checked){
+						console.log("checked");
+
+						$.ajax( url, {
 						    type: "POST",
-						    data:"{\"nlquery\":\""+question+"\"}",
+						    data:"{\"nlquery\":\""+question+"\",\"pagerankflag\":true}",
 						    contentType: "application/json",
 
 						}).done(function (data) {
+							$("#loader").css("display","none");
+
 						    var obj = JSON.parse(data);
 						    fetched_data=data;
 						    //$(".info").text(data);
@@ -56,10 +61,12 @@
 
 							for(var m in results){
 								if(results[m].length<5){
+									if(results[m].length>1){
+										
 									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
 							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 30px;">'+(results[m].length)+'</span>';
-							    	final_output += '<span class="text-test">Results found for <strong>'+chunks[m]+'</strong></span>';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
 							    	final_output+= '</h4>';
 
 							    	final_output+= '<ul class="list-group " style="auto;">';
@@ -69,11 +76,27 @@
 							   		}
 							   		final_output+= '</ul></div>';
 
+									}else{
+										
+									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
+							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
+							    	final_output+= '</h4>';
+
+							    	final_output+= '<ul class="list-group " style="auto;">';
+
+									for(var x in results[m]){
+										final_output+= '<li class="list-group-item"><a href="'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+							   		}
+							   		final_output+= '</ul></div>';
+
+									}
 
 								}else{
 									final_output += '<div class="col-md-6 order-md-6 mb-4" id="notless5">';
-							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 30px;">'+(results[m].length)+'</span>';
+							    	final_output += '<h4 class="d-flex  align-items-center mb-6" id="countbar">';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
 							    	final_output += '<span class="text-test">Results found for <strong>'+chunks[m]+'</strong></span>';
 							    	final_output+= '</h4>';
 
@@ -98,6 +121,108 @@
 						}).fail(function (error) {
 						    console.log("Error occured: error type: "+error);
 						});
+					}else{
+						console.log("not checked");
+
+						$.ajax( url, {
+						    type: "POST",
+						    data:"{\"nlquery\":\""+question+"\",\"pagerankflag\":false}",
+						    contentType: "application/json",
+
+						}).done(function (data) {
+							$("#loader").css("display","none");
+						    var obj = JSON.parse(data);
+						    fetched_data=data;
+						    //$(".info").text(data);
+
+						    var qstring="";
+
+						    for (var key in obj) {
+							  if (obj.hasOwnProperty(key)) {
+							  	if(key=="rerankedlists"){
+							  		for(x in obj[key]){
+							  			var temp=[];
+							  			for(y in obj[key][x]){
+							  				temp.push(obj[key][x][y][1]);
+							  			}
+							  			results.push(temp);
+							  		}
+							  	}else if(key=="chunktext"){
+									for(var k in obj[key]){
+										chunks.push(obj[key][k]["chunk"]);
+									}
+							    }
+							  }
+							}
+
+							var final_output="";
+
+							for(var m in results){
+								if(results[m].length<5){
+									if(results[m].length>1){
+										
+									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
+							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
+							    	final_output+= '</h4>';
+
+							    	final_output+= '<ul class="list-group " style="auto;">';
+
+									for(var x in results[m]){
+										final_output+= '<li class="list-group-item"><a href="'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+							   		}
+							   		final_output+= '</ul></div>';
+
+									}else{
+										
+									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
+							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
+							    	final_output+= '</h4>';
+
+							    	final_output+= '<ul class="list-group " style="auto;">';
+
+									for(var x in results[m]){
+										final_output+= '<li class="list-group-item"><a href="'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+							   		}
+							   		final_output+= '</ul></div>';
+
+									}
+
+								}else{
+									final_output += '<div class="col-md-6 order-md-6 mb-4" id="notless5">';
+							    	final_output += '<h4 class="d-flex  align-items-center mb-6" id="countbar">';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="text-test">Results found for <strong>'+chunks[m]+'</strong></span>';
+							    	final_output+= '</h4>';
+
+							    	final_output+= '<div>*Showing the top 5 results. (Scroll down to see more) </div>';
+
+							    	final_output+='<div class="scrollbar scrollbar-info" id="scrolled">';
+    								final_output+='<div class="force-overflow">';
+									final_output+='<ul class="list-group" style="auto;">';
+
+									for(var x in results[m]){
+										
+										final_output+= '<li class="list-group-item"><a href="'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+							   		}
+							   		
+							   		final_output+= '</ul></div></div></div></br>';
+								}
+
+							}
+
+							$(".results").html(final_output);
+
+						}).fail(function (error) {
+						    console.log("Error occured: error type: "+error);
+						});
+					}				
+
+
+					
     					});
 				});
 		</script>
@@ -108,7 +233,7 @@
 
 	<body>
 		<div class="container">
-			<ul class="nav nav-pills justify-content-end">
+			<ul class="nav nav-pills justify-content-end" id="nav-items">
 			  <li class="nav-item">
 			    <a class="nav-link active" href="#">Home</a>
 			  </li>
@@ -131,7 +256,20 @@
 			    <button type="button" class="btn btn-default" id="ask-now">AskNow</button>
 			  </div>
 			</div>
+
+			<div class="custom-control custom-checkbox my-1 mr-sm-2">
+			    <input type="checkbox" class="custom-control-input" id="customControlInline">
+			    <label class="custom-control-label" for="customControlInline">PageRank</label>
+			</div>
 		</br>
+
+		<div id="loader">
+			<div class="loader-logo">
+				<img src="img/loading.gif" >
+			</div>
+			<h5 style="text-align:center;">Fetching Data ....</h5>
+		</div>
+
 
 		<div class="results">
 
