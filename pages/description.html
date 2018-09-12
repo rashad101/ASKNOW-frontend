@@ -6,6 +6,16 @@
 		<script src="js/jquery-3.3.1.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<title>Description</title>
+
+		<script>
+			function gotoSource() {
+    				 window.open('https://github.com/AskNowQA/EARL', '_blank');
+			}
+			function gotoPaper() {
+    				 window.open('https://www.researchgate.net/publication/322418884_EARL_Joint_Entity_and_Relation_Linking_for_Question_Answering_over_Knowledge_Graphs', '_blank');
+			}
+
+		</script>
 	</head>
 
 	<body>
@@ -29,8 +39,13 @@
 		
 
 			<h4 id="earl"><strong>EARL:</strong></h4>
-			<h5> Joint Entity and Relation Linking for Question Answering over Knowledge Graphs</h5>
+			 <button type="button" class="btn btn-default" onclick="gotoSource()">Source Code</button>
+			  <button type="button" class="btn btn-default" onclick="gotoPaper()">Research Paper</button>
 		</br>
+		</br>
+			<h5> Joint Entity and Relation Linking for Question Answering over Knowledge Graphs</h5>
+			
+		
 			<p>EARL (Entity And Relation Linker), a system for jointly linking entities and relations in a question to a knowledge graph. EARL treats entity linking and relation linking as a single task and thus aims to reduce the error caused by the dependent steps. To realise this, EARL uses the knowledge graph to jointly disambiguate entity and relations. EARL obtains the context for entity disambiguation by observing the relations surrounding the entity. Similarly, it obtains the context for relation disambiguation by looking at the surrounding entities. We support multiple entities and relations occurring in complex questions by modeling the joint entity and relation linking task as an instance of the Generalised Travelling Salesman Problem (GTSP).</p>
 			</br>
 		<h5><strong>Project Team:</strong></h5>
