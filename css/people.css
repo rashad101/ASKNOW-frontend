@@ -32,7 +32,7 @@ footer {
    bottom:5px;
    margin-left: auto;
    margin-right: auto;
-   margin-top: 30%;
+   margin-top: 60%;
 }
 
 .footer-img{
@@ -66,35 +66,26 @@ footer {
   margin-right: 0;
 }
 
+/*
 .ui.padded.segment {
     padding: 1.5em;
-}
+}*/
 
 .ui.segment:last-child {
     margin-bottom: 0;
 }
 
-.ui.segment {
-    position: relative;
-    background: #fff;
-    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
-    margin: 1rem 0;
-    padding: 1em 1em;
-    border-radius: .28571429rem;
-    border: 1px solid rgba(34,36,38,.15);
+.ui.padded.segment{
+  margin-top: 50px;
 }
 
 *, :after, :before {
     box-sizing: inherit;
 }
 
-user agent stylesheet
-div {
-    display: block;
-}
 
 .ui.centered.grid>.column:not(.aligned):not(.justified):not(.row), .ui.centered.grid>.row>.column:not(.aligned):not(.justified), .ui.grid .centered.row>.column:not(.aligned):not(.justified) {
-    text-align: left;
+    text-align: center;
 }
 
 .ui.centered.grid, .ui.centered.grid>.row, .ui.grid>.centered.row {
@@ -117,4 +108,27 @@ div {
     -ms-flex-align: stretch;
     align-items: stretch;
     padding: 0;
+}
+
+.img-people{
+  max-width: 180px;
+  max-width: 150px;
+  display: block;
+  margin:auto;
+  margin-top: 12px;
+}
+
+.card{
+  max-width: 180px;
+  max-height: 270px;
+  min-height: 270px;
+  margin-left: 0px;
+  margin-top: 10px;
+  float: left;
+  margin-right: 20px;
+}
+
+#ppl{
+  display: block;
+  margin-left:14px;
 }
