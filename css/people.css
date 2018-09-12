@@ -1,0 +1,120 @@
+
+#earl{
+  margin-top: 40px;
+}
+
+.hr-body{
+  max-width: 90%;
+  margin-left: 0;
+}
+
+p{
+  max-width: 90%;
+}
+
+#nav-items{
+  margin-top:10px;
+}
+
+
+.force-overflow {
+    min-height: 400px;
+}
+
+.btn{
+	background-color: #2BBBAD;
+	color: white;
+}
+
+footer {
+   margin-top: 100px;
+   position:relative;
+   bottom:5px;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 30%;
+}
+
+.footer-img{
+  margin-left: 200px;
+  margin-right: auto;
+}
+#less5{
+  margin-bottom: 30px;
+  margin-left:-14px;
+}
+
+#notless5{
+  min-width: 100%;
+  width: auto;
+  padding-bottom: 250px;
+  margin-bottom:-30px;
+}
+
+#scrolled{
+  margin-bottom: 30px;
+  margin-left: -12px;
+}
+
+
+.btn .glyphicon {
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.btn.btn-icon .glyphicon {
+  margin-right: 0;
+}
+
+.ui.padded.segment {
+    padding: 1.5em;
+}
+
+.ui.segment:last-child {
+    margin-bottom: 0;
+}
+
+.ui.segment {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    margin: 1rem 0;
+    padding: 1em 1em;
+    border-radius: .28571429rem;
+    border: 1px solid rgba(34,36,38,.15);
+}
+
+*, :after, :before {
+    box-sizing: inherit;
+}
+
+user agent stylesheet
+div {
+    display: block;
+}
+
+.ui.centered.grid>.column:not(.aligned):not(.justified):not(.row), .ui.centered.grid>.row>.column:not(.aligned):not(.justified), .ui.grid .centered.row>.column:not(.aligned):not(.justified) {
+    text-align: left;
+}
+
+.ui.centered.grid, .ui.centered.grid>.row, .ui.grid>.centered.row {
+    text-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.ui.grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    padding: 0;
+}
