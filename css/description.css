@@ -3,11 +3,11 @@
 	min-height: 100%;
 }
 
-h5{
-  margin-top: 30px;
-  margin-bottom: -20px;
-  text-align: center;
+#earl{
+  margin-top: 40px;
 }
+
+
 #nav-items{
   margin-top:10px;
 }
@@ -61,7 +61,7 @@ footer {
    bottom:5px;
    margin-left: auto;
    margin-right: auto;
-   margin-top: 40%;
+   margin-top: 50%;
 }
 
 .footer-img{
