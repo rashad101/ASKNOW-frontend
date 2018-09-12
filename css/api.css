@@ -1,0 +1,45 @@
+
+#nav-items{
+  margin-top:10px;
+}
+
+
+
+.code-blocks{
+  display: block;
+  background-color: #F6F6F7;
+  word-wrap: break-word;
+  color: #FFFFFF;
+  max-width: 80%;
+  padding-bottom: -40px;
+}
+
+
+
+.force-overflow {
+    min-height: 400px;
+}
+
+.btn{
+	background-color: #2BBBAD;
+	color: white;
+}
+
+
+#countbar{
+  margin-left:-14px;
+}
+
+
+footer {
+   margin-top: 100px;
+   position:relative;
+   bottom:5px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.footer-img{
+	margin-left: 200px;
+	margin-right: auto;
+}

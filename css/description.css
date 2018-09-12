@@ -7,6 +7,9 @@
   margin-top: 40px;
 }
 
+p{
+  max-width: 90%;
+}
 
 #nav-items{
   margin-top:10px;

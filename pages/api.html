@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
-		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="../css/api.css">
 
 		<script src="../js/jquery-3.3.1.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -24,12 +24,88 @@
 			    <a class="nav-link" href="people.html">People</a>
 			  </li>
 			</ul>
-			<img style="display: block;margin-right: auto; margin-top: -35px; padding-top: 0px;" src="../img/AskNow_logo.png" alt="AskNow-logo" height="42" width="170">
-			<div class="info" style="min-height: 100%;">
-				<img src="../img/under-construction.jpg" alt="AskNow-logo" height="500" width="800" style="margin-top: 100px; margin-left: auto;margin-right: auto;">
-			</div>
-		</div>		
+			
+		</div>
+		<img style="display: block;margin-right: auto; margin-top: -35px; padding-top: 0px;margin-bottom: 80px;" src="../img/AskNow_logo.png" alt="AskNow-logo" height="42" width="170">
+		<h5><strong>Try out our API</strong></h5>
+
+		<p>We offer two versions of our API:</p>
+
+		<p>1. Use the EARL API without PageRank</p>
+
+		<div class="code-blocks">
+			<pre>
+			<code>
+	curl -XPOST ‘http://sda.tech/earl/api/processQuery' -H ‘Content-Type:application/json’ -d"
+	{\"nlquery\":\"Who is the president of Russia?\", "pagerankflag": false}"</code>
+		</pre>
+	</div>
+	    <p>2. Use the EARL API with PageRank integrated</p>
+
+	    <div class="code-blocks">
+	    	<pre>
+			<code>
+	curl -XPOST ‘http://sda.tech/earl/api/processQuery' -H ‘Content-Type:application/json’ -d" 
+	{\"nlquery\":\"Who is the president of Russia?\", "pagerankflag": true}"</code>
+		</pre>
+	    </div>
+		</br>
+		</br>
+
+	    <h5><strong>Example Output JSON</strong></h5>
+	    <p>The output generated has the following JSON structure</p>
+
+	    <div class="code-blocks">
+	    	<pre>
+			<code>
+	"rerankedlists": {
+	"0": [
+		[0.4499925374984741,"http://dbpedia.org/ontology/President"	],
+		[0.26798081398010254,"http://dbpedia.org/ontology/leader"	],
+		[0.2467387467622757,"http://dbpedia.org/ontology/dean"	],
+		[0.17565202713012695,"http://dbpedia.org/ontology/Governor"	]
+			 ],
+	"1": [
+		[ 0.8047428131103516,"http://dbpedia.org/resource/Russia"	],
+		[0.4531175196170807,"http://dbpedia.org/resource Russia_High_School_(Russia,_Ohio)" ],
+		[0.10261398553848267,"http://dbpedia.org/resource/Ministry_of_Defence_(Russia)"	],
+		[0.04964711517095566,"http://dbpedia.org/resource/R23_highway_(Russia)"	]
+		]
+		},
+	"changes": {
+		"0": "correct",
+		"1": "correct"
+		},
+	"chunktext": [
+		{
+			"chunk": "president",
+			"surfacelength": 9,
+			"class": "relation",
+			"surfacestart": 11
+		},
+		{
+			"chunk": "Russia",
+			"surfacelength": 6,
+			"class": "entity",
+			"surfacestart": 24
+		}
+	],
+	"er-rerun": false,
+	"ertypes": [
+			"relation",
+			"entity"
+				]
+	}</code>
+		</pre>
+		</div>
+
 	</body>
+
+
+
+
+	
+
 
 	<footer>
 		<hr>
