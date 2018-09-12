@@ -1,10 +1,11 @@
 
-.results{
-	min-height: 100%;
-}
-
 #earl{
   margin-top: 40px;
+}
+
+.hr-body{
+  max-width: 90%;
+  margin-left: 0;
 }
 
 p{
@@ -15,14 +16,7 @@ p{
   margin-top:10px;
 }
 
-.scrollbar {
-    margin-left: 30px;
-    float: left;
-    width: 100%;
-    height: 247px;
-    background: #fff;
-    overflow-y: scroll;
-}
+
 .force-overflow {
     min-height: 400px;
 }
@@ -32,58 +26,32 @@ p{
 	color: white;
 }
 
-#loader{
-  display:none;
-  margin-bottom:30px;
-}
-
-.loader-logo{
-  margin-left:46%;
-  margin-right:auto;
-  margin-top:-30px;
-}
-#countbar{
-  margin-left:-14px;
-}
-.scrollbar-info::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbar-info::-webkit-scrollbar {
-  background-color: #F5F5F5; }
-
-.scrollbar-info::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #2BBBAD; }
-
 footer {
    margin-top: 100px;
    position:relative;
    bottom:5px;
    margin-left: auto;
    margin-right: auto;
-   margin-top: 50%;
+   margin-top: 30%;
 }
 
 .footer-img{
-	margin-left: 200px;
-	margin-right: auto;
+  margin-left: 200px;
+  margin-right: auto;
 }
 #less5{
-	margin-bottom: 30px;
+  margin-bottom: 30px;
   margin-left:-14px;
 }
 
 #notless5{
-	min-width: 100%;
-	width: auto;
-	padding-bottom: 250px;
+  min-width: 100%;
+  width: auto;
+  padding-bottom: 250px;
   margin-bottom:-30px;
 }
 
 #scrolled{
-	margin-bottom: 30px;
+  margin-bottom: 30px;
   margin-left: -12px;
 }
