@@ -36,7 +36,7 @@
 		<div class="code-blocks">
 			<pre>
 			<code>
-	curl -XPOST 'https://earldemo.sda.tech/earl/api/processQuery' -H 'Content-Type:application/json' -d'
+	curl -XPOST 'http://esel.sda.tech/esel/api/processQuery' -H 'Content-Type:application/json' -d'
 	{"nlquery":"Who is the president of Russia?", "pagerankflag": false}'</code>
 		</pre>
 	</div>
@@ -45,7 +45,7 @@
 	    <div class="code-blocks">
 	    	<pre>
 			<code>
-	curl -XPOST 'https://earldemo.sda.tech/earl/api/processQuery' -H 'Content-Type:application/json' -d' 
+	curl -XPOST 'http://esel.sda.tech/esel/api/processQuery' -H 'Content-Type:application/json' -d' 
 	{"nlquery":"Who is the president of Russia?", "pagerankflag": true}'</code>
 		</pre>
 	    </div>
@@ -57,45 +57,262 @@
 
 	    <div class="code-blocks">
 	    	<pre>
-			<code>
-	"rerankedlists": {
-	"0": [
-		[0.4499925374984741,"http://dbpedia.org/ontology/President"	],
-		[0.26798081398010254,"http://dbpedia.org/ontology/leader"	],
-		[0.2467387467622757,"http://dbpedia.org/ontology/dean"	],
-		[0.17565202713012695,"http://dbpedia.org/ontology/Governor"	]
-			 ],
-	"1": [
-		[ 0.8047428131103516,"http://dbpedia.org/resource/Russia"	],
-		[0.4531175196170807,"http://dbpedia.org/resource Russia_High_School_(Russia,_Ohio)" ],
-		[0.10261398553848267,"http://dbpedia.org/resource/Ministry_of_Defence_(Russia)"	],
-		[0.04964711517095566,"http://dbpedia.org/resource/R23_highway_(Russia)"	]
-		]
-		},
-	"changes": {
-		"0": "correct",
-		"1": "correct"
-		},
-	"chunktext": [
-		{
-			"chunk": "president",
-			"surfacelength": 9,
-			"class": "relation",
-			"surfacestart": 11
-		},
-		{
-			"chunk": "Russia",
-			"surfacelength": 6,
-			"class": "entity",
-			"surfacestart": 24
-		}
-	],
-	"er-rerun": false,
-	"ertypes": [
-			"relation",
-			"entity"
-				]
-	}</code>
+			<code>[
+    {
+        "chunk": {
+            "chunk": "of Russia", 
+            "class": "entity", 
+            "surfacelength": -1, 
+            "surfacestart": -1
+        }, 
+        "class": "entity", 
+        "reranked": [
+            [
+                "Q159", 
+                "Russia"
+            ], 
+            [
+                "Q1401527", 
+                "Russia"
+            ], 
+            [
+                "Q23890440", 
+                "Russia"
+            ], 
+            [
+                "Q2624171", 
+                "Russia"
+            ], 
+            [
+                "Q17287317", 
+                "in Russia"
+            ], 
+            [
+                "Q104717", 
+                "Russia"
+            ], 
+            [
+                "Q7381938", 
+                "Russia"
+            ], 
+            [
+                "Q4350653", 
+                ", Russia"
+            ], 
+            [
+                "Q32901003", 
+                "Category:Towns in Russia"
+            ], 
+            [
+                "Q30685173", 
+                "Category:Counts of Russia"
+            ], 
+            [
+                "Q30644595", 
+                "Category:ESports in Russia"
+            ], 
+            [
+                "Q20657737", 
+                "Russia"
+            ], 
+            [
+                "Q2477732", 
+                "Russia"
+            ], 
+            [
+                "Q3537636", 
+                "Russia"
+            ], 
+            [
+                "Q4165777", 
+                "in Russia"
+            ], 
+            [
+                "Q3772566", 
+                "Russia"
+            ], 
+            [
+                "Q17287321", 
+                "in Russia"
+            ], 
+            [
+                "Q21193357", 
+                "in Russia"
+            ], 
+            [
+                "Q28155299", 
+                "Shinty in Russia"
+            ], 
+            [
+                "Q30601289", 
+                "Category:Neighborhoods in Russia"
+            ], 
+            [
+                "Q182648", 
+                "Russia"
+            ], 
+            [
+                "Q4504164", 
+                "Russia"
+            ], 
+            [
+                "Q3708651", 
+                "Russia"
+            ], 
+            [
+                "Q30806888", 
+                "Category:Welfare in Russia"
+            ], 
+            [
+                "Q18600282", 
+                "in Russia"
+            ], 
+            [
+                "Q42195225", 
+                "Russia"
+            ], 
+            [
+                "Q30595979", 
+                "Uzbeks in Russia"
+            ], 
+            [
+                "Q24058892", 
+                "Russia"
+            ], 
+            [
+                "Q42195226", 
+                "Russia"
+            ], 
+            [
+                "Q6168351", 
+                "Russia"
+            ]
+        ], 
+        "topkmatches": [
+            [
+                "Q159", 
+                "Russia"
+            ], 
+            [
+                "Q3772566", 
+                "Russia"
+            ], 
+            [
+                "Q4350653", 
+                ", Russia"
+            ], 
+            [
+                "Q21193357", 
+                "in Russia"
+            ], 
+            [
+                "Q18600282", 
+                "in Russia"
+            ], 
+            [
+                "Q2477732", 
+                "Russia"
+            ], 
+            [
+                "Q24058892", 
+                "Russia"
+            ], 
+            [
+                "Q4165777", 
+                "in Russia"
+            ], 
+            [
+                "Q4504164", 
+                "Russia"
+            ], 
+            [
+                "Q182648", 
+                "Russia"
+            ], 
+            [
+                "Q23890440", 
+                "Russia"
+            ], 
+            [
+                "Q7381938", 
+                "Russia"
+            ], 
+            [
+                "Q17287317", 
+                "in Russia"
+            ], 
+            [
+                "Q3708651", 
+                "Russia"
+            ], 
+            [
+                "Q6168351", 
+                "Russia"
+            ], 
+            [
+                "Q2624171", 
+                "Russia"
+            ], 
+            [
+                "Q104717", 
+                "Russia"
+            ], 
+            [
+                "Q20657737", 
+                "Russia"
+            ], 
+            [
+                "Q42195226", 
+                "Russia"
+            ], 
+            [
+                "Q42195225", 
+                "Russia"
+            ], 
+            [
+                "Q17287321", 
+                "in Russia"
+            ], 
+            [
+                "Q1401527", 
+                "Russia"
+            ], 
+            [
+                "Q3537636", 
+                "Russia"
+            ], 
+            [
+                "Q28155299", 
+                "Shinty in Russia"
+            ], 
+            [
+                "Q30595979", 
+                "Uzbeks in Russia"
+            ], 
+            [
+                "Q30601289", 
+                "Category:Neighborhoods in Russia"
+            ], 
+            [
+                "Q30644595", 
+                "Category:ESports in Russia"
+            ], 
+            [
+                "Q30685173", 
+                "Category:Counts of Russia"
+            ], 
+            [
+                "Q30806888", 
+                "Category:Welfare in Russia"
+            ], 
+            [
+                "Q32901003", 
+                "Category:Towns in Russia"
+            ]
+        ]
+    }
+]
+	</code>
 		</pre>
 		</div>
 
