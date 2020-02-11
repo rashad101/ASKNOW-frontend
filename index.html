@@ -18,7 +18,7 @@
 					chunks=[];
 					var results=[];
         			        //var proxy = "https://cors-anywhere.herokuapp.com/";
-					var main_url = "http://esel.sda.tech/esel/api/processQuery";
+					var main_url = "http://pnel.sda.tech/pnel/api/processQuery";
 					//var url = proxy+main_url;
                                         var url = main_url;
 					var question = $("#user_question").val();
@@ -39,27 +39,30 @@
                             console.log(entitychunks);
                             fetched_data=data;
                             //$(".info").text(data);
-                            for (var i = 0; i < entitychunks.length; i++) {
-                                results.push(entitychunks[i]["reranked"]);
-                                chunks.push(entitychunks[i]["chunk"]["chunk"]);
+                            var keys = Object.keys(entitychunks['entities']);
+                            for(var i=0; i<keys.length; i++){
+                                results.push([keys[i]]);
+                                console.log(results);
+                                chunks.push([entitychunks['entities'][keys[i]][0]]);
                             }
+
 
 							var final_output="";
 
 							for(var m in results){
-								if(results[m].length<5){
-									if(results[m].length>1){
+								if(results.length<5){
+									if(results.length>1){
 										
 									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
 							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
 							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
 							    	final_output+= '</h4>';
 
 							    	final_output+= '<ul class="list-group " style="auto;">';
 
 									for(var x in results[m]){
-										final_output+= '<li class="list-group-item"><a href="'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+										final_output+= '<li class="list-group-item"><a href="'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
 							   		}
 							   		final_output+= '</ul></div>';
 
@@ -67,14 +70,14 @@
 										
 									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
 							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
 							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
 							    	final_output+= '</h4>';
 
 							    	final_output+= '<ul class="list-group " style="auto;">';
 
 									for(var x in results[m]){
-										final_output+= '<li class="list-group-item"><a href="'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+										final_output+= '<li class="list-group-item"><a href="'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
 							   		}
 							   		final_output+= '</ul></div>';
 
@@ -83,7 +86,7 @@
 								}else{
 									final_output += '<div class="col-md-6 order-md-6 mb-4" id="notless5">';
 							    	final_output += '<h4 class="d-flex  align-items-center mb-6" id="countbar">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
 							    	final_output += '<span class="text-test">Results found for <strong>'+chunks[m]+'</strong></span>';
 							    	final_output+= '</h4>';
 
@@ -95,7 +98,7 @@
 
 									for(var x in results[m]){
 										
-										final_output+= '<li class="list-group-item"><a href="'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+										final_output+= '<li class="list-group-item"><a href="'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
 							   		}
 							   		
 							   		final_output+= '</ul></div></div></div></br>';
@@ -122,27 +125,29 @@
                             console.log(entitychunks);
                             fetched_data=data;
                             //$(".info").text(data);
-							for (var i = 0; i < entitychunks.length; i++) {
-                                results.push(entitychunks[i]["reranked"]);
-                                chunks.push(entitychunks[i]["chunk"]["chunk"]);
+                            var keys = Object.keys(entitychunks['entities']);
+							for(var i=0; i<keys.length; i++){
+                                results.push([keys[i]]);
+                                console.log(results);
+                                chunks.push([entitychunks['entities'][keys[i]][0]]);
                             }
 
 							var final_output="";
 
 							for(var m in results){
-								if(results[m].length<5){
-									if(results[m].length>1){
+								if(results.length<5){
+									if(results.length>1){
 										
 									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
 							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
 							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
 							    	final_output+= '</h4>';
 
 							    	final_output+= '<ul class="list-group " style="auto;">';
 
 									for(var x in results[m]){
-										final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m][x][0])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+										final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
 							   		}
 							   		final_output+= '</ul></div>';
 
@@ -150,14 +155,14 @@
 										
 									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
 							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
 							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
 							    	final_output+= '</h4>';
 
 							    	final_output+= '<ul class="list-group " style="auto;">';
 
 									for(var x in results[m]){
-										final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m][x][0])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+										final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
 							   		}
 							   		final_output+= '</ul></div>';
 
@@ -166,7 +171,7 @@
 								}else{
 									final_output += '<div class="col-md-6 order-md-6 mb-4" id="notless5">';
 							    	final_output += '<h4 class="d-flex  align-items-center mb-6" id="countbar">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results[m].length)+'</span>';
+							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
 							    	final_output += '<span class="text-test">Results found for <strong>'+chunks[m]+'</strong></span>';
 							    	final_output+= '</h4>';
 
@@ -178,7 +183,7 @@
 
 									for(var x in results[m]){
 										
-										final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m][x][0])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+										final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
 							   		}
 							   		
 							   		final_output+= '</ul></div></div></div></br>';
@@ -217,7 +222,7 @@
 			  </li>
 			</ul>
 			<img style="display: block;margin-right: auto; margin-top: -35px; padding-top: 0px;" src="img/AskNow_logo.png" alt="AskNow-logo" height="42" width="170">
-			<h5>ESEL - Embedding based Sequential Entity Linker</h5>
+			<h5>PNEL - Pointer Network based Entity Linker</h5>
 			<div class="input-group mb-3" style="margin-top: 50px;">
 
 			  <input type="text" class="form-control" value="Is San Francisco located in California ?" aria-label="ask-q" aria-describedby="basic-addon2" id="user_question">
