@@ -24,179 +24,54 @@
 					var question = $("#user_question").val();
 					$("#loader").css("display","block");
 					$(".results").html('');
+					console.log("not checked");
 
-					if(document.getElementById("customControlInline").checked){
-						console.log("checked");
+					$.ajax( url, {
+					    type: "POST",
+					    data:"{\"nlquery\":\""+question+"\",\"pagerankflag\":false}",
+					    contentType: "application/json",
 
-						$.ajax( url, {
-						    type: "POST",
-						    data:"{\"nlquery\":\""+question+"\",\"pagerankflag\":true}",
-						    contentType: "application/json",
-
-						}).done(function (data) {
-							$("#loader").css("display","none");
-							var entitychunks = JSON.parse(data);
-                            console.log(entitychunks);
-                            fetched_data=data;
-                            //$(".info").text(data);
-                            var keys = Object.keys(entitychunks['entities']);
-                            for(var i=0; i<keys.length; i++){
-                                results.push([keys[i]]);
-                                console.log(results);
-                                chunks.push([entitychunks['entities'][keys[i]][0]]);
-                            }
-
-
-							var final_output="";
-
-							for(var m in results){
-								if(results.length<5){
-									if(results.length>1){
-										
-									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
-							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
-							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
-							    	final_output+= '</h4>';
-
-							    	final_output+= '<ul class="list-group " style="auto;">';
-
-									for(var x in results[m]){
-										final_output+= '<li class="list-group-item"><a href="'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
-							   		}
-							   		final_output+= '</ul></div>';
-
-									}else{
-										
-									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
-							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
-							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
-							    	final_output+= '</h4>';
-
-							    	final_output+= '<ul class="list-group " style="auto;">';
-
-									for(var x in results[m]){
-										final_output+= '<li class="list-group-item"><a href="'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
-							   		}
-							   		final_output+= '</ul></div>';
-
-									}
-
-								}else{
-									final_output += '<div class="col-md-6 order-md-6 mb-4" id="notless5">';
-							    	final_output += '<h4 class="d-flex  align-items-center mb-6" id="countbar">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
-							    	final_output += '<span class="text-test">Results found for <strong>'+chunks[m]+'</strong></span>';
-							    	final_output+= '</h4>';
-
-							    	final_output+= '<div>*Showing the top 5 results. (Scroll down to see more) </div>';
-
-							    	final_output+='<div class="scrollbar scrollbar-info" id="scrolled">';
-    								final_output+='<div class="force-overflow">';
-									final_output+='<ul class="list-group" style="auto;">';
-
-									for(var x in results[m]){
-										
-										final_output+= '<li class="list-group-item"><a href="'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
-							   		}
-							   		
-							   		final_output+= '</ul></div></div></div></br>';
+					}).done(function (data) {
+						$("#loader").css("display","none");
+						var entitychunks = JSON.parse(data);
+                        fetched_data=data;
+                        var keys = Object.keys(entitychunks['entities']);
+						for(var i=0; i<keys.length; i++){
+                            chunkstring = ' '
+							chunkentids = [];
+							for(var m in entitychunks['entities'][i]){
+								chunkstring += ','+entitychunks['entities'][i][m][2];
+								if (chunkentids.includes(entitychunks['entities'][i][m][0]) == false){
+									chunkentids.push(entitychunks['entities'][i][m][0]);
 								}
-
 							}
+                            results.push(chunkentids);
+                            chunks.push([chunkstring]);
+                        }
 
-							$(".results").html(final_output);
+						var final_output="";
+						for(var m in results){
+							final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
+					    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
+					    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
+					    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
+					    	final_output+= '</h4>';
+
+					    	final_output+= '<ul class="list-group " style="auto;">';
+
+							for(var x in results[m]){
+								final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m][x])+'"target="_blank">'+(results[m][x])+'</a></li>';		
+					   		}
+					   		final_output+= '</ul></div>';
+
+						}
+
+
+						$(".results").html(final_output);
 
 						}).fail(function (error) {
 						    console.log("Error occured: error type: "+error);
 						});
-					}else{
-						console.log("not checked");
-
-						$.ajax( url, {
-						    type: "POST",
-						    data:"{\"nlquery\":\""+question+"\",\"pagerankflag\":false}",
-						    contentType: "application/json",
-
-						}).done(function (data) {
-							$("#loader").css("display","none");
-							var entitychunks = JSON.parse(data);
-                            console.log(entitychunks);
-                            fetched_data=data;
-                            //$(".info").text(data);
-                            var keys = Object.keys(entitychunks['entities']);
-							for(var i=0; i<keys.length; i++){
-                                results.push([keys[i]]);
-                                console.log(results);
-                                chunks.push([entitychunks['entities'][keys[i]][0]]);
-                            }
-
-							var final_output="";
-
-							for(var m in results){
-								if(results.length<5){
-									if(results.length>1){
-										
-									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
-							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
-							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
-							    	final_output+= '</h4>';
-
-							    	final_output+= '<ul class="list-group " style="auto;">';
-
-									for(var x in results[m]){
-										final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
-							   		}
-							   		final_output+= '</ul></div>';
-
-									}else{
-										
-									final_output += '<div class="col-md-6 order-md-6 mb-4" id="less5">';
-							    	final_output += '<h4 class="d-flex  align-items-center mb-6">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
-							    	final_output += '<span class="text-test">Result found for <strong>'+chunks[m]+'</strong></span>';
-							    	final_output+= '</h4>';
-
-							    	final_output+= '<ul class="list-group " style="auto;">';
-
-									for(var x in results[m]){
-										final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
-							   		}
-							   		final_output+= '</ul></div>';
-
-									}
-
-								}else{
-									final_output += '<div class="col-md-6 order-md-6 mb-4" id="notless5">';
-							    	final_output += '<h4 class="d-flex  align-items-center mb-6" id="countbar">';
-							    	final_output += '<span class="badge badge-secondary badge-pill" style="margin-right: 25px;">'+(results.length)+'</span>';
-							    	final_output += '<span class="text-test">Results found for <strong>'+chunks[m]+'</strong></span>';
-							    	final_output+= '</h4>';
-
-							    	final_output+= '<div>*Showing the top 5 results. (Scroll down to see more) </div>';
-
-							    	final_output+='<div class="scrollbar scrollbar-info" id="scrolled">';
-    								final_output+='<div class="force-overflow">';
-									final_output+='<ul class="list-group" style="auto;">';
-
-									for(var x in results[m]){
-										
-										final_output+= '<li class="list-group-item"><a href="https://www.wikidata.org/wiki/'+(results[m])+'"target="_blank">'+(results[m])+'</a></li>';		
-							   		}
-							   		
-							   		final_output+= '</ul></div></div></div></br>';
-								}
-
-							}
-
-							$(".results").html(final_output);
-
-						}).fail(function (error) {
-						    console.log("Error occured: error type: "+error);
-						});
-					}				
 
 
 					
@@ -225,7 +100,7 @@
 			<h5>PNEL - Pointer Network based Entity Linker</h5>
 			<div class="input-group mb-3" style="margin-top: 50px;">
 
-			  <input type="text" class="form-control" value="Is San Francisco located in California ?" aria-label="ask-q" aria-describedby="basic-addon2" id="user_question">
+			  <input type="text" class="form-control" value="Where in India is the prime minister Narendra Modi located ?" aria-label="ask-q" aria-describedby="basic-addon2" id="user_question">
 			  <div class="input-group-append">
 			    <button type="button" class="btn btn-default" id="ask-now">AskNow</button>
 			  </div>
@@ -233,7 +108,6 @@
 
 			<div class="custom-control custom-checkbox my-1 mr-sm-2">
 			    <input type="checkbox" class="custom-control-input" id="customControlInline">
-			    <label class="custom-control-label" for="customControlInline">PageRank</label>
 			</div>
 		</br>
 
